@@ -13,7 +13,7 @@ app.all('/plivo-response', (req, res) => {
     <Dial>
         <User>sip:testuser11849479228825931@phone.plivo.com</User>
     </Dial>
-</Response>`;`;
+</Response>`;
   res.set('Content-Type', 'text/xml');
   res.send(xmlResponse);
 });
