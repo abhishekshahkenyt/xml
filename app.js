@@ -1,0 +1,20 @@
+// app.js
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.all('/plivo-response', (req, res) => {
+  const xmlResponse = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Speak>Welcome to Plivo. This is a test call.</Speak>
+</Response>`;
+  res.set('Content-Type', 'text/xml');
+  res.send(xmlResponse);
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
