@@ -10,8 +10,8 @@ app.all('/plivo-response', (req, res) => {
   const xmlResponse = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
     <Speak>Welcome to Plivo. Connecting you now.</Speak>
-    <Dial>
-        <User>sip:testuser11849479228825931@phone.plivo.com</User>
+    <Dial callerId="sip:testuser990109291922029390@phone.plivo.com">
+        <Sip>sip:testuser11849479228825931@phone.plivo.com</Sip>
     </Dial>
 </Response>`;
   res.set('Content-Type', 'text/xml');
