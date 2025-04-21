@@ -9,8 +9,11 @@ app.use(express.json());
 app.all('/plivo-response', (req, res) => {
   const xmlResponse = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Speak>Welcome to Plivo. This is a test call.</Speak>
-</Response>`;
+    <Speak>Welcome to Plivo. Connecting you now.</Speak>
+    <Dial>
+        <User>sip:testuser11849479228825931@phone.plivo.com</User>
+    </Dial>
+</Response>`;`;
   res.set('Content-Type', 'text/xml');
   res.send(xmlResponse);
 });
