@@ -9,7 +9,16 @@ app.use(express.json());
 app.all('/plivo-response', (req, res) => {
   const xmlResponse = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Speak>Welcome to Plivo. Connecting you now.</Speak>
+    <Speak> Hello. This is a test message generated to demonstrate Plivo's text-to-speech feature. 
+        This message will continue for approximately one minute. 
+        Plivo enables you to deliver spoken messages to phones all over the world. 
+        You can use it for reminders, alerts, or customer service notifications. 
+        This example continues to fill time so that the total spoken duration will be close to sixty seconds. 
+        You can customize the message, language, voice, and speed as needed. 
+        Text-to-speech is a powerful feature for automation. 
+        Let’s continue with more placeholder content to reach the target length. 
+        This message includes enough words to make the call duration approximately one minute long. 
+        We are still speaking. Nearly done. Thanks for listening. Have a great day..</Speak>
     <Dial callerId="+919905018700">
         <Number>+919905018700</Number>
     </Dial>
