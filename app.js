@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.all('/plivo-response', (req, res) => {
+app.get('/plivo-response', (req, res) => {
   const xmlResponse = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
     <Speak> Hello. This is a test message generated to demonstrate Plivo's text-to-speech feature. 
@@ -21,6 +21,16 @@ app.all('/plivo-response', (req, res) => {
         We are still speaking. Nearly done. Thanks for listening. Have a great day..</Speak>
     <Dial callerId="+919905018700">
         <Number>+919905018700</Number>
+    </Dial>
+</Response>`;
+  res.set('Content-Type', 'text/xml');
+  res.send(xmlResponse);
+})
+.get("/plivotransfer",(req,res)=>{
+  const xmlResponse = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Dial>
+        <User>sip:testuser5168948351477542@phone.plivo.com</User>
     </Dial>
 </Response>`;
   res.set('Content-Type', 'text/xml');
