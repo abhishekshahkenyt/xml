@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Route for text-to-speech and dialing
 app.get('/plivo-response', (req, res) => {
   const xmlResponse = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
@@ -25,18 +26,36 @@ app.get('/plivo-response', (req, res) => {
 </Response>`;
   res.set('Content-Type', 'text/xml');
   res.send(xmlResponse);
-})
-.get("/plivotransfer",(req,res)=>{
-  const xmlResponse = `<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-    <Dial>
-        <User>sip:testuser5168948351477542@phone.plivo.com</User>
-    </Dial>
-</Response>`;
+});
+
+// Route for simultaneous SIP dialing
+app.get("/plivotransfer", (req, res) => {
+  // Accept comma-separated list or repeated query params
+  let sipUris = req.query.sipuris;
+  if (!sipUris) {
+    return res.status(400).send('Missing sipuris parameter');
+  }
+
+  // If it's a single string, split it by comma
+  if (typeof sipUris === 'string') {
+    sipUris = sipUris.split(',');
+  }
+
+  const xmlParts = ['<?xml version="1.0" encoding="UTF-8"?>', '<Response>', '  <Dial>'];
+
+  sipUris.forEach(uri => {
+    xmlParts.push(`    <User>${uri.trim()}</User>`);
+  });
+
+  xmlParts.push('  </Dial>', '</Response>');
+
+  const xmlResponse = xmlParts.join('\n');
+
   res.set('Content-Type', 'text/xml');
   res.send(xmlResponse);
 });
 
+// Start server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
