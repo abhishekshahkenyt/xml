@@ -32,7 +32,7 @@ app.get("/con",(req,res)=>{
 
   const xmlResponse = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-	<Conference startConferenceOnEnter="true" endConferenceOnExit="true">My Room</Conference>
+	<Conference startConferenceOnEnter="true">My Room</Conference>
 </Response>
 `;
   res.set('Content-Type', 'text/xml');
