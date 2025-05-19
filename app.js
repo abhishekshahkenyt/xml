@@ -28,6 +28,16 @@ app.get('/plivo-response', (req, res) => {
   res.send(xmlResponse);
 });
 
+app.get("/con",(req,res)=>{
+
+  const xmlResponse = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+	<Conference startConferenceOnEnter="true" endConferenceOnExit="true">My Room</Conference>
+</Response>
+`;
+  res.set('Content-Type', 'text/xml');
+  res.send(xmlResponse);
+});
 // Route for simultaneous SIP dialing
 app.get("/plivotransfer", (req, res) => {
   // Accept comma-separated list or repeated query params
